@@ -19,7 +19,7 @@ def load(fname):
 
     data = []
     for line in f.readlines():
-        data.append(line.replace('\n','').split(','))
+        data.append(line.replace('\n','').split(';'))
 
     f.close()
 
@@ -35,11 +35,11 @@ def compareauthor(name,sfile):
     
     found=0
     for people in staff:
-        nom=','.join(people[2:4])[2:-1]
+        nom=','.join(people[2:3])[2:-1]
         if  nom == name.encode("utf-8"):
             #print('FOUND'),
             found=1
-            jsthing=''.join(people[7:])
+            jsthing=''.join(people[4:])
             #print(jsthing[1:]),
             linktoreturn = '<a href={0}>{1}</a>'.format(jsthing[1:],name)
             type(linktoreturn)
@@ -69,7 +69,9 @@ def write_table(tlist,alist, filename,stfile):
     #pretty_author_name = lambda author: author.split(",")[0] + author.split(",")[1].strip()[1] + "."
     my_string = '' 
     target.write('<HTML><head></head><body>')
-    target.write('<table>')
+    target.write('<table class="staff" style="border-collapse:collapse;">')
+    target.write("\n")
+    target.write('<tr><th class="top">Author(s)</th><th class="top">Title</th></tr>')
     target.write("\n")
     for title, authors in zip(tlist, alist):    
     #for paper in titlelist:
@@ -78,8 +80,8 @@ def write_table(tlist,alist, filename,stfile):
         for author in authors:
             temp=compareauthor(name=author, sfile=stfile)
             target.write(temp.encode('ascii', 'xmlcharrefreplace'))
-            target.write("\n")
-    
+        
+	target.write("\n")
         target.write('</td><td>')
         #target.write(my_string.join(title))
         target.write(' '.join(title).encode('ascii', 'xmlcharrefreplace'))
@@ -101,17 +103,21 @@ if __name__ == "__main__":
     print(),
 
     #query the location of the current staff list
-    staffloc='/Users/james/Public/smtg/staff_current.txt'
-    if os.path.exists(staffloc): staff=load(staffloc) 
-	outfile='./test.html'
+    staffloc='../staff_current.txt'
+    if os.path.exists(staffloc):
+    	staff=load(staffloc) 
+    else:
+        print('NO FILE FOUND AT', staffloc)	
+	exit()
+	
+    outfile='./test.html'
 
     authlist=[]
     titlelist=[]
 
     for person in staff:
         #glue together the peoples name in stafflist
-        eachname=','.join(person[2:4])[2:-1]
-
+        eachname=','.join(person[2:3])[2:-1]
         # Query ADS for author, institute, pub date, database...
         query = ads.SearchQuery( q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year),
         #fl=['id', 'first_author', 'year', 'bibcode', 'identifier', 'author','title'],
