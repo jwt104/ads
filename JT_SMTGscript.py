@@ -121,7 +121,7 @@ def write_table(tlist,alist, dlist, filename,stfile):
     target.close()
 
 
-# In[35]:
+# In[37]:
 
 #main prog
 if __name__ == "__main__":
@@ -152,17 +152,17 @@ if __name__ == "__main__":
         #glue together the peoples name in stafflist
         eachname=','.join(person[2:3])[2:-1]
         # Query ADS for author, institute, pub date, database...
-        query = ads.SearchQuery(  fl=['author','title','doi'], q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year),
+        papers=list(ads.SearchQuery(  fl=['author','title','doi'], q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year)))
         #fl=['id', 'first_author', 'year', 'bibcode', 'identifier', 'author','title'],
-        rows=5 )
-        query.execute()
+        #query.execute()
         #count the number of pubs each person has (so far)
-        num = int(query.response.numFound)
+        #num = int(query.response.numFound)
+        num=len(papers)
         print("{person} had {num} publications in {year}".format(person=eachname, num=num, year=year))
         
         #if anything published, then add that to the list
         if num > 0:
-            for n in query:
+            for n in papers:
                 #avoid multiple instances of same paper
                 if n.title not in titlelist:
                     titlelist.append(n.title)
