@@ -1,7 +1,7 @@
 Alan Hood; Prof; "Hood, A. W."; "Coronal Heating, MHD Waves, Emerging Flux"; "javascript:createDoc('Prof. Alan Hood','305','alan','awh','01334 463710')"
 Vasilis Archontis; Dr; "Archontis, V."; "Emerging Flux, Jets and Eruptions"; "javascript:createDoc('Dr Vasilis Archontis','313','vasilis','va11','01334 461648')"
 Ineke De Moortel; Prof; "De Moortel, I."; "Coronal Seismology, MHD Waves, TRACE Observations"; "javascript:createDoc('Prof. Ineke De Moortel','311','ineke','ineke.demoortel','01334 463757')"
-Duncan Mackay; Dr; "Mackay, D. H."; "Prominences, Flux Transport Simulations, Global Coronal Magnetic Fields"; "javascript:createDoc('Dr Duncan Mackay','324','duncan','dhm','01334 463760')"
+Duncan H. Mackay; Dr; "Mackay, D. H."; "Prominences, Flux Transport Simulations, Global Coronal Magnetic Fields"; "javascript:createDoc('Dr Duncan Mackay','324','duncan','dhm','01334 463760')"
 Thomas Neukirch; Prof; "Neukirch, T."; "3D MHD Equilibria, Reconnection, Particle Acceleration, Rotating Magnetospheres"; "javascript:createDoc('Prof. Thomas Neukirch','303','thomas','tn3','01334 463713')"
 Clare Parnell; Prof; "Parnell, C. E."; "Magnetic Reconnection, Coronal Heating, Magnetic Carpet, SOHO, Hinode and SDO Observations"; "javascript:createDoc('Prof. Clare Parnell','309','clare','cep','01334 463706')"
 Andy Wright; Dr; "Wright, A. N."; "Magnetosphere, MHD Waves, Particle Acceleration"; "javascript:createDoc('Dr Andrew Wright','212','andy','anw','01334 463736')"
