@@ -179,29 +179,5 @@ if __name__ == "__main__":
     print('')
 
 
-# In[14]:
-
-temp=str(doilist[0])[1:-1]
-print(temp.encode("ascii"))
-print(temp[2:-1])
-
-
-# In[85]:
-
-y=[s.encode('ascii', 'ignore') for s in doilist]
-
-
-# In[77]:
-
-type(doilist)
-
-
-# In[24]:
-
-print(authlist)
-
-
-# In[ ]:
-
 
 
