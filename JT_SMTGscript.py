@@ -1,12 +1,12 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[28]:
 
 from __future__ import print_function, division
 
 
-# In[2]:
+# In[29]:
 
 import ads
 import sys
@@ -17,13 +17,13 @@ from StringIO import StringIO
 from time import localtime
 
 
-# In[3]:
+# In[30]:
 
 # ADS needs a token - this one is for jwt104@googlemail.com so be warned!
 ads.config.token = 'zmmgkG86fM0hBeBjoOJicrr5GegJWe69vJ5ULDNd'
 
 
-# In[4]:
+# In[31]:
 
 #simple function to read in a file
 def load(fname):
@@ -39,7 +39,7 @@ def load(fname):
     return data
 
 
-# In[5]:
+# In[32]:
 
 # function to compare name against staff list and add hyperlink if match found
 def compareauthor(name,sfile):
@@ -47,13 +47,15 @@ def compareauthor(name,sfile):
     assert type(name) == unicode, 'name must be unicode string'
     assert type(sfile) == str, 'staff filename must be a string'
     
-    
     if os.path.exists(sfile): staff=load(sfile)
     
     found=0
     for people in staff:
         nom=','.join(people[2:3])[2:-1]
-        altnom=', '.join(people[0].split(' ')[::-1])
+        if len(people[0].split()) == 3:
+            altnom=''.join(people[0].split(' ')[2:3])+', '+' '.join(people[0].split(' ')[0:2])
+        else:
+            altnom=', '.join(people[0].split(' ')[::-1])
         if  nom == name.encode("utf-8"):
             #print('FOUND'),
             found=1
@@ -78,7 +80,7 @@ def compareauthor(name,sfile):
     return linktoreturn
 
 
-# In[17]:
+# In[33]:
 
 #simple function to output basic html table of correctly formatted authors and titles of SMTG pubs
 def write_table(tlist,alist, dlist, filename,stfile):
@@ -93,7 +95,6 @@ def write_table(tlist,alist, dlist, filename,stfile):
     target = open(filename, 'w')
     target.truncate()
     
-    #pretty_author_name = lambda author: author.split(",")[0] + author.split(",")[1].strip()[1] + "."
     my_string = '' 
     target.write('<HTML><head></head><body>')
     target.write('<table>')
@@ -109,7 +110,7 @@ def write_table(tlist,alist, dlist, filename,stfile):
         target.write("\n")
         target.write('</td><td>')
         target.write('<a href=http://dx.doi.org/')
-        target.write(str(doi).encode('ascii')[3:-2])#crop out unicode bits (hardcoded)
+        target.write(str(doi).encode('ascii')[3:-2])
         target.write('>')
         target.write(str(title).encode('ascii', 'xmlcharrefreplace')[3:-2])
         target.write('</a>')
@@ -120,7 +121,7 @@ def write_table(tlist,alist, dlist, filename,stfile):
     target.close()
 
 
-# In[18]:
+# In[35]:
 
 #main prog
 if __name__ == "__main__":
@@ -135,8 +136,7 @@ if __name__ == "__main__":
     print(),
 
     #query the location of the current staff list
-    staffloc='./staff_current.txt'
-    
+    staffloc='../staff_current.txt'
     if os.path.exists(staffloc):
         staff=load(staffloc) 
     else:
@@ -152,9 +152,9 @@ if __name__ == "__main__":
         #glue together the peoples name in stafflist
         eachname=','.join(person[2:3])[2:-1]
         # Query ADS for author, institute, pub date, database...
-        query = ads.SearchQuery( q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year),
+        query = ads.SearchQuery(  fl=['author','title','doi'], q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year),
         #fl=['id', 'first_author', 'year', 'bibcode', 'identifier', 'author','title'],
-        fl=['author','title','doi'], rows=10)
+        rows=5 )
         query.execute()
         #count the number of pubs each person has (so far)
         num = int(query.response.numFound)
@@ -177,3 +177,31 @@ if __name__ == "__main__":
     print('DONE: output to {0}'.format(outfile))
     print('-------')
     print('')
+
+
+# In[14]:
+
+temp=str(doilist[0])[1:-1]
+print(temp.encode("ascii"))
+print(temp[2:-1])
+
+
+# In[85]:
+
+y=[s.encode('ascii', 'ignore') for s in doilist]
+
+
+# In[77]:
+
+type(doilist)
+
+
+# In[24]:
+
+print(authlist)
+
+
+# In[ ]:
+
+
+
