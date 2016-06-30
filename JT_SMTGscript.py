@@ -112,7 +112,7 @@ def write_table(tlist,alist, dlist, filename,stfile):
         target.write('<a href=http://dx.doi.org/')
         target.write(str(doi).encode('ascii')[3:-2])
         target.write('>')
-        target.write(str(title).encode('ascii', 'xmlcharrefreplace')[3:-2])
+        target.write(str(title)[3:-2].encode('ascii', 'xmlcharrefreplace'))
         target.write('</a>')
         target.write('</td></tr>')
         target.write("\n")
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     print(),
 
     #query the location of the current staff list
-    staffloc='../staff_current.txt'
+    staffloc='./staff_current_temp2.txt'
     if os.path.exists(staffloc):
         staff=load(staffloc) 
     else:
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         #glue together the peoples name in stafflist
         eachname=','.join(person[2:3])[2:-1]
         # Query ADS for author, institute, pub date, database...
-        papers=list(ads.SearchQuery(  fl=['author','title','doi'], q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year)))
+        papers=list(ads.SearchQuery(  fl=['author','title','doi'],  q='author:\"{0}\" pubdate:{1} aff:(\"University of St Andrews\") property:refereed  database:("astronomy" OR "physics")'.format(eachname, year)))
         #fl=['id', 'first_author', 'year', 'bibcode', 'identifier', 'author','title'],
         #query.execute()
         #count the number of pubs each person has (so far)
