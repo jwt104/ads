@@ -226,48 +226,4 @@ if __name__ == "__main__":
     print('')
 
 
-# In[15]:
-
-papers=list(ads.SearchQuery(sort="date desc", fl=['author','title','doi', 'bibcode'],                                             q='author:\"{0}\" aff:(\"University of St Andrews\"                                             OR \"National Astronomical Observatory of Japan\")                                             property:refereed'.format('Antolin, P.')))
-
-
-# In[17]:
-
-for paper in papers:
-    print(paper.bibcode)
-
-
-# In[ ]:
-
-import shlex
-shlex.split("'play' 'song I\ Want\ To\ Break\ Free')
-
-
-# In[21]:
-
-stuff='http\://www.example.url:ftp\://www.example.url'
-re.split(r'(?<!\\):', stuff)
-
-
-# In[22]:
-
-jenny="javascript:createPDoc('Jennifer O\'Hara','223','johara','jo97','01334 463727')"
-
-
-# In[95]:
-
-jenny.split(",")
-
-
-# In[94]:
-
-splits=re.compile("\'([a-zA-z ']+)\'")
-# mystring=" 'Linehan', 'Ayoade', 'O\'Dowd', 'Parkinson' "
-strs=splits.findall(jenny)
-strs
-
-
-# In[ ]:
-
-
 
