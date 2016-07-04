@@ -80,7 +80,7 @@ def compareauthor(name,sfile):
     return linktoreturn
 
 
-# In[33]:
+# In[39]:
 
 #simple function to output basic html table of correctly formatted authors and titles of SMTG pubs
 def write_table(tlist,alist, dlist, filename,stfile):
@@ -121,7 +121,7 @@ def write_table(tlist,alist, dlist, filename,stfile):
     target.close()
 
 
-# In[37]:
+# In[40]:
 
 #main prog
 if __name__ == "__main__":
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     print(),
 
     #query the location of the current staff list
-    staffloc='./staff_current_temp2.txt'
+    staffloc='../staff_current.txt'
     if os.path.exists(staffloc):
         staff=load(staffloc) 
     else:
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         #glue together the peoples name in stafflist
         eachname=','.join(person[2:3])[2:-1]
         # Query ADS for author, institute, pub date, database...
-        papers=list(ads.SearchQuery(  fl=['author','title','doi'],  q='author:\"{0}\" pubdate:{1} aff:(\"University of St Andrews\") property:refereed  database:("astronomy" OR "physics")'.format(eachname, year)))
+        papers=list(ads.SearchQuery(  fl=['author','title','doi'], q='author:\"{0}\" pubdate:{1}         aff:(\"University of St Andrews\") property:refereed          database:("astronomy" OR "physics")'.format(eachname, year)))
         #fl=['id', 'first_author', 'year', 'bibcode', 'identifier', 'author','title'],
         #query.execute()
         #count the number of pubs each person has (so far)
@@ -178,6 +178,8 @@ if __name__ == "__main__":
     print('-------')
     print('')
 
+
+# In[ ]:
 
 
 
