@@ -211,8 +211,8 @@ if __name__ == "__main__":
     print('SMTG recent pubs script (JT 2016)')
     print("-------")
     
-    staffloc='../staff_current_temp.txt'
-    outfile='../staff_current_temp2.txt'
+    staffloc='./staff_current.txt'
+    outfile='./staff_current_3pubs.txt'
     
     updatepubs(staffloc, outfile)
 
